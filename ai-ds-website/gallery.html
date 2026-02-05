@@ -229,7 +229,7 @@
             showLoader();
 
             try {
-                const res = await fetch('/api/gallery');
+                const res = await fetch(`${API_BASE_URL}/api/gallery`);
                 const result = await res.json();
 
                 if (result.success && result.data.length > 0) {

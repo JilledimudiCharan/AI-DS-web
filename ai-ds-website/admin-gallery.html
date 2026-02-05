@@ -512,7 +512,7 @@
             container.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading...</p></div>';
 
             try {
-                const res = await fetch('/api/gallery?all=true');
+                const res = await fetch('https://ai-ds-web-1-bl78.onrender.com/api/gallery?all=true');
                 const result = await res.json();
 
                 if (result.success && result.data.length > 0) {
@@ -625,7 +625,7 @@
 
             try {
                 const id = document.getElementById('imageId').value;
-                const url = isEditing ? `/api/gallery/${id}` : '/api/gallery';
+                const url = isEditing ? `https://ai-ds-web-1-bl78.onrender.com/api/gallery/${id}` : 'https://ai-ds-web-1-bl78.onrender.com/api/gallery';
                 const method = isEditing ? 'PUT' : 'POST';
 
                 const res = await fetch(url, {
@@ -650,7 +650,7 @@
             if (!confirm('Are you sure you want to delete this image?')) return;
 
             try {
-                const res = await fetch(`/api/gallery/${id}`, { method: 'DELETE' });
+                const res = await fetch(`https://ai-ds-web-1-bl78.onrender.com/api/gallery/${id}`, { method: 'DELETE' });
                 const result = await res.json();
                 if (result.success) {
                     loadGallery();
