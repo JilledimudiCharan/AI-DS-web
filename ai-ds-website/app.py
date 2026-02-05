@@ -904,7 +904,7 @@ def update_gallery(img_id):
 
 # ----------------------------------------
 # Route: Delete Gallery Image
-# DELETE /api/gallery/<id>
+# DELETE /api/gallery/<id> for gallery
 # ----------------------------------------
 @app.route('/api/gallery/<int:img_id>', methods=['DELETE'])
 def delete_gallery(img_id):
