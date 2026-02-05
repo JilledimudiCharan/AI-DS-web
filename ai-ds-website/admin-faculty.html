@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Faculty - Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="smvecLogo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 260px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            padding: 24px 0;
+            z-index: 100;
+        }
+
+        .logo {
+            padding: 0 24px 32px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo h1 {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+        }
+
+        .logo p {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .nav-menu {
+            padding: 24px 16px;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: 4px;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #d4a853 0%, #b8942e 100%);
+            color: #1e293b;
+        }
+
+        .nav-menu .icon {
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 32px 40px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a853 0%, #b8942e 100%);
+            color: #1e293b;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 168, 83, 0.3);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .faculty-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+
+        .faculty-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .faculty-card.hod {
+            border-color: #d4a853;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .faculty-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4a853 0%, #e6c76f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .faculty-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .faculty-designation {
+            font-size: 0.8rem;
+            color: #d4a853;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .faculty-subject {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .faculty-bio {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        .faculty-email {
+            font-size: 0.8rem;
+            color: #3b82f6;
+            margin-top: 12px;
+        }
+
+        .faculty-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #f8fafc;
+            border-color: #d4a853;
+        }
+
+        .action-btn.delete:hover {
+            background: #fef2f2;
+            border-color: #f87171;
+            color: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #f1f5f9;
+            border-top-color: #d4a853;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 12px;
+            width: 550px;
+            max-width: 90%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-body {
+            padding: 24px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4a853;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .toggle.active {
+            background: #d4a853;
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: left 0.2s;
+        }
+
+        .toggle.active::after {
+            left: 23px;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <h1><span>🎓</span> SMVEC</h1>
+            <p>AI & DS Department</p>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="admin.html"><span class="icon">📊</span> Dashboard</a></li>
+            <li><a href="admin-faculty.html" class="active"><span class="icon">👨‍🏫</span> Faculty</a></li>
+            <li><a href="admin-achievements.html"><span class="icon">🏆</span> Achievements</a></li>
+            <li><a href="admin-gallery.html"><span class="icon">📸</span> Gallery</a></li>
+            <li><a href="index.html" target="_blank"><span class="icon">🌐</span> View Website</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1>Manage Faculty</h1>
+                <p>Add, edit, and manage faculty members</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="openAddModal()">➕ Add Faculty</button>
+                <button class="btn btn-secondary" onclick="loadFaculty()">🔄 Refresh</button>
+            </div>
+        </header>
+
+        <div id="facultyContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading faculty...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Faculty Member</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="facultyForm">
+                    <input type="hidden" id="facultyId">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" id="name" required placeholder="Dr. Faculty Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Designation *</label>
+                        <input type="text" id="designation" required placeholder="e.g., Associate Professor">
+                    </div>
+                    <div class="form-group">
+                        <label>Specialization/Subject *</label>
+                        <input type="text" id="subject" required placeholder="e.g., Machine Learning">
+                    </div>
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea id="bio" rows="3" placeholder="Brief description about the faculty"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" placeholder="faculty@college.edu">
+                    </div>
+                    <div class="form-group">
+                        <label>Head of Department</label>
+                        <div class="toggle-wrapper">
+                            <div class="toggle" id="hodToggle" onclick="toggleHod()"></div>
+                            <span id="hodLabel">No</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveFaculty()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allFaculty = [];
+        let isEditing = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadFaculty();
+        });
+
+        async function loadFaculty() {
+            const container = document.getElementById('facultyContainer');
+            container.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading...</p></div>';
+
+            try {
+                const res = await fetch('/api/faculty');
+                const result = await res.json();
+
+                if (result.success && result.data.length > 0) {
+                    allFaculty = result.data;
+                    displayFaculty(allFaculty);
+                } else {
+                    showEmptyState();
+                }
+            } catch (error) {
+                container.innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><h3>Error</h3><p>Failed to load data</p></div>';
+            }
+        }
+
+        function displayFaculty(faculty) {
+            const container = document.getElementById('facultyContainer');
+            if (faculty.length === 0) { showEmptyState(); return; }
+
+            let html = '<div class="faculty-grid">';
+            faculty.forEach(f => {
+                html += `<div class="faculty-card ${f.isHod ? 'hod' : ''}">
+                    <div class="faculty-avatar">${f.isHod ? '👨‍🎓' : '👨‍🏫'}</div>
+                    <div class="faculty-name">${f.name}</div>
+                    <div class="faculty-designation">${f.designation}</div>
+                    <div class="faculty-subject">${f.subject}</div>
+                    ${f.bio ? `<div class="faculty-bio">${f.bio}</div>` : ''}
+                    ${f.email ? `<div class="faculty-email">📧 ${f.email}</div>` : ''}
+                    <div class="faculty-actions">
+                        <button class="action-btn" onclick="editFaculty(${f.id})">✏️ Edit</button>
+                        <button class="action-btn delete" onclick="deleteFaculty(${f.id})">🗑️ Delete</button>
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function showEmptyState() {
+            document.getElementById('facultyContainer').innerHTML = `
+                <div class="empty-state"><div class="icon">👨‍🏫</div><h3>No Faculty Yet</h3><p>Click "Add Faculty" to create one</p></div>`;
+        }
+
+        function openAddModal() {
+            isEditing = false;
+            document.getElementById('modalTitle').textContent = 'Add Faculty Member';
+            document.getElementById('facultyForm').reset();
+            document.getElementById('hodToggle').classList.remove('active');
+            document.getElementById('hodLabel').textContent = 'No';
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function editFaculty(id) {
+            const f = allFaculty.find(x => x.id === id);
+            if (!f) return;
+
+            isEditing = true;
+            document.getElementById('modalTitle').textContent = 'Edit Faculty Member';
+            document.getElementById('facultyId').value = id;
+            document.getElementById('name').value = f.name;
+            document.getElementById('designation').value = f.designation;
+            document.getElementById('subject').value = f.subject;
+            document.getElementById('bio').value = f.bio || '';
+            document.getElementById('email').value = f.email || '';
+
+            const toggle = document.getElementById('hodToggle');
+            if (f.isHod) { toggle.classList.add('active'); }
+            else { toggle.classList.remove('active'); }
+            document.getElementById('hodLabel').textContent = f.isHod ? 'Yes' : 'No';
+
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function toggleHod() {
+            const toggle = document.getElementById('hodToggle');
+            toggle.classList.toggle('active');
+            document.getElementById('hodLabel').textContent = toggle.classList.contains('active') ? 'Yes' : 'No';
+        }
+
+        async function saveFaculty() {
+            const data = {
+                name: document.getElementById('name').value,
+                designation: document.getElementById('designation').value,
+                subject: document.getElementById('subject').value,
+                bio: document.getElementById('bio').value,
+                email: document.getElementById('email').value,
+                isHod: document.getElementById('hodToggle').classList.contains('active')
+            };
+
+            if (!data.name || !data.designation || !data.subject) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            try {
+                const id = document.getElementById('facultyId').value;
+                const url = isEditing ? `/api/faculty/${id}` : '/api/faculty';
+                const method = isEditing ? 'PUT' : 'POST';
+
+                const res = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                if (result.success) {
+                    closeModal();
+                    loadFaculty();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                alert('Failed to save faculty');
+            }
+        }
+
+        async function deleteFaculty(id) {
+            if (!confirm('Are you sure you want to delete this faculty member?')) return;
+
+            try {
+                const res = await fetch(`/api/faculty/${id}`, { method: 'DELETE' });
+                const result = await res.json();
+                if (result.success) {
+                    loadFaculty();
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                alert('Failed to delete faculty');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - AI & DS Department | SMVEC</title>
+    <link rel="icon" type="image/png" href="smvecLogo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .gallery-hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 100px 20px 60px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .gallery-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .gallery-hero p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .gallery-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .gallery-card-content {
+            padding: 16px 20px;
+        }
+
+        .gallery-caption {
+            font-size: 0.95rem;
+            color: #1e293b;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .gallery-date {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Old loading styles removed - now using loader.css */
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state .icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #64748b;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-caption {
+            color: #fff;
+            margin-top: 16px;
+            font-size: 1rem;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover {
+            color: #d4a853;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="smvecLogo.png" alt="SMVEC Logo" class="logo-img">
+                <span class="logo-text">SRI MANAKULA VINAYAGAR ENGINEERING COLLEGE</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="faculty.html" class="nav-link">Faculty</a></li>
+                <li><a href="labs.html" class="nav-link">Labs</a></li>
+                <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+                <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gallery-hero">
+        <h1>📸 Event Gallery</h1>
+        <p>Capturing memorable moments from department events, workshops, and achievements</p>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div id="galleryContainer">
+            <!-- Loader will be injected here dynamically -->
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImg">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI & Data Science Department</h3>
+                    <p>Sri Manakula Vinayagar Engineering College, Puducherry</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SMVEC. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let galleryImages = [];
+
+        document.addEventListener('DOMContentLoaded', loadGallery);
+
+        async function loadGallery() {
+            const container = document.getElementById('galleryContainer');
+            showLoader();
+
+            try {
+                const res = await fetch('/api/gallery');
+                const result = await res.json();
+
+                if (result.success && result.data.length > 0) {
+                    galleryImages = result.data;
+                    displayGallery(galleryImages);
+                } else {
+                    showEmptyState();
+                }
+            } catch (error) {
+                // Fallback with sample data if API fails
+                showEmptyState();
+            } finally {
+                hideLoader();
+            }
+        }
+
+        function displayGallery(images) {
+            const container = document.getElementById('galleryContainer');
+            let html = '<div class="gallery-grid">';
+
+            images.forEach((img, index) => {
+                html += `<div class="gallery-card" onclick="openLightbox(${index})">
+                    <img src="${img.imageUrl}" alt="${img.caption}" loading="lazy">
+                    <div class="gallery-card-content">
+                        <p class="gallery-caption">${img.caption}</p>
+                        ${img.eventDate ? `<p class="gallery-date">📅 ${formatDate(img.eventDate)}</p>` : ''}
+                    </div>
+                </div>`;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function showEmptyState() {
+            document.getElementById('galleryContainer').innerHTML = `
+                <div class="empty-state">
+                    <div class="icon">🖼️</div>
+                    <h3>No Images Yet</h3>
+                    <p>Check back later for event photos</p>
+                </div>
+            `;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function openLightbox(index) {
+            const img = galleryImages[index];
+            document.getElementById('lightboxImg').src = img.imageUrl;
+            document.getElementById('lightboxCaption').textContent = img.caption;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Close lightbox on clicking outside image
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>

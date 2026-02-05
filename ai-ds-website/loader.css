@@ -1,0 +1,247 @@
+/* Kinetic Dots Loader Styles */
+
+:root {
+    --loader-cyan: #67e8f9;
+    /* cyan-300 */
+    --loader-blue: #2563eb;
+    /* blue-600 */
+    --loader-shadow: rgba(6, 182, 212, 0.6);
+}
+
+.loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    padding: 2rem;
+    background: transparent;
+}
+
+.loader-dots-flex {
+    display: flex;
+    gap: 1.25rem;
+    /* gap-5 */
+}
+
+.dot-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 80px;
+    /* h-20 */
+    width: 24px;
+    /* w-6 */
+}
+
+/* 1. THE BOUNCING DOT */
+.bouncing-dot {
+    position: relative;
+    width: 20px;
+    /* w-5 */
+    height: 20px;
+    /* h-5 */
+    z-index: 10;
+    will-change: transform;
+}
+
+.dot-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(to bottom, var(--loader-cyan), var(--loader-blue));
+    box-shadow: 0 0 15px var(--loader-shadow);
+    will-change: transform;
+}
+
+/* Specular highlight for liquid look */
+.dot-inner::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    filter: blur(0.5px);
+}
+
+/* 2. FLOOR RIPPLE (Shockwave on impact) */
+.floor-ripple {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    /* w-10 */
+    height: 12px;
+    /* h-3 */
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 100%;
+    opacity: 0;
+}
+
+/* 3. REFLECTIVE SHADOW */
+.reflective-shadow {
+    position: absolute;
+    bottom: -4px;
+    width: 20px;
+    /* w-5 */
+    height: 6px;
+    /* h-1.5 */
+    border-radius: 100%;
+    background: rgba(6, 182, 212, 0.4);
+    filter: blur(4px);
+}
+
+/* Base Animation Assignment */
+.bouncing-dot {
+    animation: gravity-bounce 1.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.dot-inner {
+    animation: rubber-morph 1.4s linear infinite;
+}
+
+.floor-ripple {
+    animation: ripple-expand 1.4s linear infinite;
+}
+
+.reflective-shadow {
+    animation: shadow-breathe 1.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Delays for each dot */
+.dot-wrapper:nth-child(1) .bouncing-dot,
+.dot-wrapper:nth-child(1) .dot-inner,
+.dot-wrapper:nth-child(1) .floor-ripple,
+.dot-wrapper:nth-child(1) .reflective-shadow {
+    animation-delay: 0s;
+}
+
+.dot-wrapper:nth-child(2) .bouncing-dot,
+.dot-wrapper:nth-child(2) .dot-inner,
+.dot-wrapper:nth-child(2) .floor-ripple,
+.dot-wrapper:nth-child(2) .reflective-shadow {
+    animation-delay: 0.15s;
+}
+
+.dot-wrapper:nth-child(3) .bouncing-dot,
+.dot-wrapper:nth-child(3) .dot-inner,
+.dot-wrapper:nth-child(3) .floor-ripple,
+.dot-wrapper:nth-child(3) .reflective-shadow {
+    animation-delay: 0.3s;
+}
+
+.dot-wrapper:nth-child(4) .bouncing-dot,
+.dot-wrapper:nth-child(4) .dot-inner,
+.dot-wrapper:nth-child(4) .floor-ripple,
+.dot-wrapper:nth-child(4) .reflective-shadow {
+    animation-delay: 0.45s;
+}
+
+/* Keyframes */
+@keyframes gravity-bounce {
+    0% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    50% {
+        transform: translateY(-40px);
+        animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes rubber-morph {
+    0% {
+        transform: scale(1.4, 0.6);
+    }
+
+    5% {
+        transform: scale(0.9, 1.1);
+    }
+
+    15% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1, 1);
+    }
+
+    85% {
+        transform: scale(0.9, 1.1);
+    }
+
+    100% {
+        transform: scale(1.4, 0.6);
+    }
+}
+
+@keyframes shadow-breathe {
+    0% {
+        transform: scale(1.4);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(0.5);
+        opacity: 0.1;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0.6;
+    }
+}
+
+@keyframes ripple-expand {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+        border-width: 4px;
+    }
+
+    5% {
+        opacity: 0.8;
+    }
+
+    30% {
+        transform: scale(1.5);
+        opacity: 0;
+        border-width: 0px;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Loader Overlay Styles */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    /* slate-900 with opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.loader-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact the AI & DS Department - Get in touch with us">
+    <title>AI & DS Department | Contact</title>
+    <link rel="icon" type="image/png" href="smvecLogo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="smvecLogo.png" alt="SMVEC Logo" class="logo-img">
+                <span class="logo-text">SRI MANAKULA VINAYAGAR ENGINEERING COLLEGE</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="faculty.html" class="nav-link">Faculty</a></li>
+                <li><a href="labs.html" class="nav-link">Labs</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Contact Info Cards -->
+            <section class="content-section">
+                <div class="contact-cards">
+                    <div class="contact-info-card">
+                        <span class="contact-icon">📍</span>
+                        <h3>Our Address</h3>
+                        <p>Department of AI & DS</p>
+                        <p>123 College Road</p>
+                        <p>Tech City, State 12345</p>
+                        <p>Country</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <span class="contact-icon">📧</span>
+                        <h3>Email Us</h3>
+                        <p><a href="mailto:aids@college.edu">aids@college.edu</a></p>
+                        <p><a href="mailto:hod.aids@college.edu">hod.aids@college.edu</a></p>
+                        <p><a href="mailto:admissions@college.edu">admissions@college.edu</a></p>
+                    </div>
+                    <div class="contact-info-card">
+                        <span class="contact-icon">📞</span>
+                        <h3>Call Us</h3>
+                        <p>Main Office: +1 234 567 8900</p>
+                        <p>HOD Office: +1 234 567 8901</p>
+                        <p>Admissions: +1 234 567 8902</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <span class="contact-icon">🕐</span>
+                        <h3>Office Hours</h3>
+                        <p>Monday - Friday</p>
+                        <p>9:00 AM - 5:00 PM</p>
+                        <p>Saturday: 9:00 AM - 1:00 PM</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Form Section -->
+            <section class="content-section">
+                <div class="contact-form-section">
+                    <div class="form-header">
+                        <h2 class="section-title">Send Us a Message</h2>
+                        <p>Have a question or feedback? Fill out the form below and we'll get back to you as soon as
+                            possible.</p>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form id="contactForm" class="contact-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter your first name"
+                                    required>
+                                <span class="error-message" id="firstNameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter your last name"
+                                    required>
+                                <span class="error-message" id="lastNameError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email address"
+                                    required>
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                                <span class="error-message" id="phoneError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject <span class="required">*</span></label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="admission">Admission Inquiry</option>
+                                <option value="courses">Course Information</option>
+                                <option value="faculty">Faculty Contact</option>
+                                <option value="labs">Lab Facilities</option>
+                                <option value="placement">Placement Information</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error-message" id="subjectError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Your Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" placeholder="Type your message here..."
+                                required></textarea>
+                            <span class="error-message" id="messageError"></span>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to our newsletter for updates
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span>Send Message</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="successMessage" class="success-message" style="display: none;">
+                        <span class="success-icon">✓</span>
+                        <h3>Message Sent Successfully!</h3>
+                        <p>Thank you for contacting us. We'll get back to you within 24-48 hours.</p>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">Send Another
+                            Message</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map Section -->
+            <section class="content-section">
+                <h2 class="section-title">Find Us</h2>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <span class="map-icon">🗺️</span>
+                        <p>Interactive map would be embedded here</p>
+                        <p class="map-address">123 College Road, Tech City, State 12345</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Social Media Links -->
+            <section class="content-section">
+                <h2 class="section-title">Connect With Us</h2>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <span class="social-icon">📘</span>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <span class="social-icon">🐦</span>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <span class="social-icon">💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <span class="social-icon">📷</span>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube">
+                        <span class="social-icon">📺</span>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AI & DS Department</h3>
+                    <p>Shaping the future through innovation in Artificial Intelligence and Data Science education.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="faculty.html">Faculty</a></li>
+                        <li><a href="labs.html">Labs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📍 123 College Road, Tech City</p>
+                    <p>📧 aids@college.edu</p>
+                    <p>📞 +1 234 567 8900</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Department of AI & DS. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
