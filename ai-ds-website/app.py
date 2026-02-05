@@ -932,12 +932,13 @@ def delete_gallery(img_id):
 # ========================================
 # Run the Application
 # ========================================
+# ========================================
+# Run Database Initialization
+# ========================================
+init_db()
+
 if __name__ == '__main__':
     print("\n" + "="*50)
-    print("🚀 Starting AI & DS Department Backend Server")
-    print("="*50)
-    
-    init_db()
     
     print("\n📡 API Endpoints Available:")
     print("-" * 40)
