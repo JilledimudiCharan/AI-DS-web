@@ -958,7 +958,7 @@ if __name__ == '__main__':
     print("GET  /api/contact          → Get messages")
     print("POST /api/contact          → Submit contact")
     print("-" * 40)
-    print("\n🌐 Server running at: http://localhost:5000")
+    print(f"\n🌐 Server running at: http://0.0.0.0:{port}")
     print("📁 Serving static files from current directory")
     print("\nPress Ctrl+C to stop the server\n")
     

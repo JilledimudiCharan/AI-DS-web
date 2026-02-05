@@ -445,7 +445,7 @@ function isInViewport(element) {
 // =====================================================
 
 // API Base URL - Change this if backend runs on different port
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://ai-ds-web-1-bl78.onrender.com';
 
 /**
  * Submit contact form data to backend API
